@@ -2,7 +2,6 @@ package MinHash.Concurrency;
 
 import MinHash.DataAccessLayer.FeatureValuesPair;
 import MinHash.DataAccessLayer.H2.H2Vocabulary;
-import MinHash.DataAccessLayer.MapDB.MapDBVocabulary;
 import MinHash.FeatureExtractors.Feature;
 import MinHash.Signatures.HashFunction;
 import MinHash.Signatures.Signature;
@@ -49,7 +48,7 @@ public class Worker implements Runnable {
 
     private void work() throws Exception {
         Feature feature = this.fileWorker.get();
-        if (!this.h2Vocabulary.isKeyExists(feature.toString())) {
+        if (!this.h2Vocabulary.IsExists(feature.toString())) {
             long[] hashValues = new long[this.hashFunctions.size()];
             for (int i = 0; i < this.hashFunctions.size(); i++) {
                 hashValues[i] = this.hashFunctions.get(i).hash(feature);
@@ -58,7 +57,7 @@ public class Worker implements Runnable {
             this.vocabularyWorker.put(new FeatureValuesPair(feature, hashValues));
             this.signer.sign(hashValues);
         } else {
-            this.signer.sign(this.h2Vocabulary.get(feature.toString()));
+            this.signer.sign(this.h2Vocabulary.Get(feature.toString()));
         }
     }
 }

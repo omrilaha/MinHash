@@ -1,7 +1,6 @@
 import MinHash.DataAccessLayer.H2.H2Signatures;
 import MinHash.DataAccessLayer.H2.H2Vocabulary;
-import MinHash.DataAccessLayer.MapDB.MapDBSignatures;
-import MinHash.DataAccessLayer.MapDB.MapDBVocabulary;
+
 import MinHash.FeatureExtractors.ByteExtractorFactory;
 import MinHash.Scheme;
 import MinHash.Signatures.ByteHashFunctionFactory;
@@ -12,11 +11,11 @@ public class MinHashScheme {
 
     public static void main(String[] args) throws Exception {
 
-        H2Signatures h2Signatures = new H2Signatures(100, false);
-        // h2Signatures.CreateTable();
+        H2Signatures h2Signatures = new H2Signatures(100);
+        h2Signatures.CreateSignaturesTable();
 
-        H2Vocabulary h2Vocabulary = new H2Vocabulary(100, false);
-        // h2Vocabulary.CreateTable();
+        H2Vocabulary h2Vocabulary = new H2Vocabulary(100);
+        h2Vocabulary.CreateVocabularyTable();
 
         Scheme scheme = new Scheme(
                 new ByteHashFunctionFactory(),

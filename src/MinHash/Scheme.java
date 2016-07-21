@@ -2,8 +2,6 @@ package MinHash;
 
 import MinHash.DataAccessLayer.H2.H2Signatures;
 import MinHash.DataAccessLayer.H2.H2Vocabulary;
-import MinHash.DataAccessLayer.MapDB.MapDBSignatures;
-import MinHash.DataAccessLayer.MapDB.MapDBVocabulary;
 import MinHash.FeatureExtractors.ExtractorFactory;
 import MinHash.Signatures.HashFunctionsFactory;
 import MinHash.Signatures.HashFunctionsGenerator;
@@ -64,8 +62,7 @@ public class Scheme {
             System.out.println(e.getMessage());
         }
 
-        this.h2Signatures.close();
-        this.h2Vocabulary.close();
+        System.out.println("------- FINISH ------");
     }
 
     private void addDocument(String filename, ExecutorService executor, ExecutorService managers) throws IOException{

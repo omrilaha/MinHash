@@ -1,13 +1,9 @@
 package MinHash;
 
 import MinHash.Utils.GeneralUtils;
-import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.tuple.Tuples;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class FileHandler {
 

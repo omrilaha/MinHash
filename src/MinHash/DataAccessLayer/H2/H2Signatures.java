@@ -3,7 +3,7 @@ package MinHash.DataAccessLayer.H2;
 import java.sql.*;
 
 public class H2Signatures extends H2DB {
-    private final String columnNames = "hash";
+    private final String columnNames = "HASH";
     private final String tableName = "SIGNATURES";
     private int signatureSize;
 
@@ -15,7 +15,7 @@ public class H2Signatures extends H2DB {
     }
 
     public void CreateSignaturesTable() throws SQLException {
-        String columnNames = "filename varchar(400) primary key, ";
+        String columnNames = "FILENAME varchar(255) primary key, ";
         for (int i = 0; i < this.signatureSize - 1; i++) {
             columnNames += this.columnNames + i + " BIGINT, ";
         }
@@ -29,7 +29,7 @@ public class H2Signatures extends H2DB {
     }
 
     private void generateInsertPreparedQuery() {
-        String columns = "filename, ";
+        String columns = "FILENAME, ";
         String preparedValues = "";
         for (int i = 0; i < this.signatureSize - 1; i++) {
             columns += this.columnNames + i + ", ";

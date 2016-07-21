@@ -2,9 +2,6 @@ package MinHash.Concurrency;
 
 import MinHash.DataAccessLayer.FeatureValuesPair;
 import MinHash.DataAccessLayer.H2.H2Vocabulary;
-import MinHash.DataAccessLayer.MapDB.MapDBVocabulary;
-
-import java.sql.SQLException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -32,13 +29,13 @@ public class VocabularyWorker implements Runnable {
             while(this.run) {
                 FeatureValuesPair featureValuesPair = this.queue.take();
                 // System.out.println("MapDBVocabulary queue: " +this.queue.size());
-                this.h2Vocabulary.add(featureValuesPair.feature.toString(), featureValuesPair.hashValues);
-                this.counter--;
-                if (this.counter == 0) {
-                    System.out.println(this.filename + " COMMIT 10000 FEATURES");
-                    this.h2Vocabulary.commit();
-                    this.counter = 10000;
-                }
+                this.h2Vocabulary.Insert(featureValuesPair.feature.toString(), featureValuesPair.hashValues);
+//                this.counter--;
+//                if (this.counter == 0) {
+//                    System.out.println(this.filename + " COMMIT 10000 FEATURES");
+//                    this.h2Vocabulary.commit();
+//                    this.counter = 10000;
+//                }
             }
         } catch (Exception e) {
             e.printStackTrace();

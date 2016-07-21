@@ -6,8 +6,6 @@ import MinHash.Concurrency.VocabularyWorker;
 import MinHash.Concurrency.Worker;
 import MinHash.DataAccessLayer.H2.H2Signatures;
 import MinHash.DataAccessLayer.H2.H2Vocabulary;
-import MinHash.DataAccessLayer.MapDB.MapDBVocabulary;
-import MinHash.DataAccessLayer.MapDB.MapDBSignatures;
 import MinHash.FeatureExtractors.Extractor;
 import MinHash.FeatureExtractors.Feature;
 
@@ -85,7 +83,7 @@ public class Signature {
                 printedSignature += "[" + this.signature[i] + "],";
             }
             System.out.println("-------------------------------\nSIGNATURE OF: " + this.filename + "\n" + printedSignature + "\n--------------------------");
-            this.h2Signatures.add(this.filename, this.signature);
+            this.h2Signatures.Insert(this.filename, this.signature);
         }
     }
 
@@ -95,7 +93,7 @@ public class Signature {
             hashValues[i] = this.hashFunctions.get(i).hash(feature);
         }
 
-        this.h2Vocabulary.add(feature.toString(), hashValues);
+        this.h2Vocabulary.Insert(feature.toString(), hashValues);
 
         int index = 0;
         for (Long hashValue : hashValues) {
