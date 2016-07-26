@@ -29,7 +29,7 @@ public class H2Vocabulary extends H2DB {
         PreparedStatement preparedStatement = null;
         long[] featureSignature = null;
 
-        String query = "SELECT * FROM " + this.tableName + " WHERE FEATURE='?'";
+        String query = "SELECT * FROM " + this.tableName + " WHERE FEATURE=?";
         try {
             connection.setAutoCommit(false);
 
@@ -47,7 +47,7 @@ public class H2Vocabulary extends H2DB {
 
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Exception Message " + e.getLocalizedMessage());
+            System.out.println("Vocabulary Get - Exception Message " + e.getLocalizedMessage());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -62,7 +62,7 @@ public class H2Vocabulary extends H2DB {
         PreparedStatement preparedStatement = null;
         boolean exists = false;
 
-        String query = "SELECT COUNT(*) FROM " + this.tableName + " WHERE FEATURE='?'";
+        String query = "SELECT COUNT(*) FROM " + this.tableName + " WHERE FEATURE=?";
         try {
             connection.setAutoCommit(false);
 
@@ -78,7 +78,7 @@ public class H2Vocabulary extends H2DB {
 
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Exception Message " + e.getLocalizedMessage());
+            System.out.println("Vocabulary IsExists - Exception Message " + e.getLocalizedMessage());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -101,10 +101,10 @@ public class H2Vocabulary extends H2DB {
         }
         columns += this.columnNames + (signatureSize - 1);
         columns = "(" + columns + ")";
-        preparedValues += "?";
+        preparedValues += "?, ?";
         preparedValues = "(" + preparedValues + ")";
 
-        this.InsertPreparedQuery = "INSERT INTO " + tableName  + columns + preparedValues;
+        this.InsertPreparedQuery = "INSERT INTO " + tableName  + columns + " VALUES " + preparedValues;
     }
 
     public void Insert(String feature, long[] signature) throws SQLException {
@@ -115,9 +115,9 @@ public class H2Vocabulary extends H2DB {
             connection.setAutoCommit(false);
 
             preparedStatement = connection.prepareStatement(this.InsertPreparedQuery);
-            preparedStatement.setString(0, feature);
+            preparedStatement.setString(1, feature);
             for (int i = 0; i < signature.length; i++) {
-                preparedStatement.setLong(i + 1, signature[i]);
+                preparedStatement.setLong(i + 2, signature[i]);
             }
 
             preparedStatement.executeUpdate();
@@ -125,7 +125,7 @@ public class H2Vocabulary extends H2DB {
 
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Exception Message " + e.getLocalizedMessage());
+            System.out.println("Vocabulary Insert - Exception Message " + e.getLocalizedMessage());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -40,7 +40,7 @@ public class H2Signatures extends H2DB {
         preparedValues += "?";
         preparedValues = "(" + preparedValues + ")";
 
-        this.InsertPreparedQuery = "INSERT INTO " + tableName  + columns + preparedValues;
+        this.InsertPreparedQuery = "INSERT INTO " + tableName  + columns + " VALUES " + preparedValues;
     }
 
     public void Insert(String filename, long[] signature) throws SQLException {
@@ -61,7 +61,7 @@ public class H2Signatures extends H2DB {
 
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Exception Message " + e.getLocalizedMessage());
+            System.out.println("Signature Insert - Exception Message " + e.getLocalizedMessage());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

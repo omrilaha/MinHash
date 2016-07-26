@@ -12,10 +12,10 @@ public class MinHashScheme {
     public static void main(String[] args) throws Exception {
 
         H2Signatures h2Signatures = new H2Signatures(100);
-        h2Signatures.CreateSignaturesTable();
+        // h2Signatures.CreateSignaturesTable();
 
         H2Vocabulary h2Vocabulary = new H2Vocabulary(100);
-        h2Vocabulary.CreateVocabularyTable();
+        // h2Vocabulary.CreateVocabularyTable();
 
         Scheme scheme = new Scheme(
                 new ByteHashFunctionFactory(),

@@ -37,9 +37,9 @@ public class Scheme {
     }
 
     public void run(Vector<String> fileNames) throws SQLException {
-        int poolSize = 1;
+        int poolSize = 4;
         ExecutorService executor = Executors.newFixedThreadPool(poolSize);
-        ExecutorService managers = Executors.newFixedThreadPool(1); //Executors.newFixedThreadPool(fileNames.capacity());
+        ExecutorService managers = Executors.newFixedThreadPool(fileNames.capacity());
         for (String filename : fileNames) {
             try {
                 addDocument(filename, executor, managers);

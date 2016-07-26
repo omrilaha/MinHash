@@ -17,7 +17,7 @@ public class Worker implements Runnable {
     private int exists = 0;
     private SynchronizedSigner signer;
 
-    public Worker(Signature signature,  FileWorker fileWorker, VocabularyWorker vocabularyWorker, SynchronizedSigner signer) {
+    public Worker(Signature signature, FileWorker fileWorker, VocabularyWorker vocabularyWorker, SynchronizedSigner signer) {
         this.signature = signature;
         this.hashFunctions = signature.hashFunctions;
         this.h2Vocabulary = signature.h2Vocabulary;
